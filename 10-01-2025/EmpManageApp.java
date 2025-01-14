@@ -158,7 +158,7 @@ public class EmpManageApp {
                     } else {
                         System.out.print("Enter Employee ID to Remove: ");
                         int removeId = sc.nextInt();
-                        boolean found = false;
+                        boolean found = false;  
 
                         // Search for the employee to remove
                         for (int i = 0; i < Emp.countEmp; i++) {
