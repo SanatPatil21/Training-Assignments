@@ -11,35 +11,14 @@ abstract class Employee {
     int age;
     String designation;
     float salary;
-    int empid;
+    int id;
     static Employee[] emparray = new Employee[100];
     static int empCount = 0;
     Scanner sc = new Scanner(System.in);
 
-    //Handler to Read and Validate ID
-    private int idValidator(){
-        System.out.println("Please enter an Employee ID:");
-        while (true) {
-            try {
-                int inputId = sc.nextInt();
-                for (int i = 0; i < empCount; i++) {
-                    if (emparray[i].empid == inputId) {
-                        throw new DuplicateIdException();
-                    }
-                }
-                return inputId;
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter numeric value");
-            } catch (DuplicateIdException e){
-                e.displayMessage();
-            }
-            
-        }
-    }
-
     Employee(float salary, String designation) {      
-        //All validator methods handle the Reading and Validation of Employee Details.
-        this.empid=idValidator();
+        //All validator methods from all the READER CLASSES handle the Reading and Validation of Employee Details.
+        this.id=IdReader.idValidator("Employeee");
         this.name = NameReader.nameValidator();
         this.age=AgeReader.ageValidator(21, 60);
         this.salary = salary;
@@ -51,7 +30,7 @@ abstract class Employee {
     }
 
     public void display() {
-        System.out.println("Employee Id: " + empid);
+        System.out.println("Employee Id: " + id);
         System.out.println("Name: " + name);
         System.out.println("Age: " + age);
         System.out.println("Salary: " + salary);
@@ -158,7 +137,7 @@ public class EmpManagementApp {
                     boolean found = false;
 
                     for (int i = 0; i < Employee.empCount; i++) {
-                        if (Employee.emparray[i].empid == deleteEmployeeInput) {
+                        if (Employee.emparray[i].id == deleteEmployeeInput) {
                             Employee.emparray[i].display();
                             System.out.print("Are you sure you want to delete this Employee? (Y/N): ");
                             char confirmationInput = sc.next().charAt(0);
@@ -274,14 +253,42 @@ class Menu {
 
 //We can have one class to read all details of empolyees otherwise we can have different classes for Age, Name, ID etc. So it can be more reusable. If we need more finetuned logic for Employee Management System then we can use a single class itself.
 
+
+class IdReader{
+    public static int idValidator(String role){
+        System.out.println("Please enter an "+role+" ID:");
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            try {
+                int inputId = sc.nextInt();
+                for (int i = 0; i < Employee.empCount; i++) {
+                    //This is used specifically for employee
+                    if (Employee.emparray[i].id == inputId) {
+                        throw new DuplicateIdException();
+                    }
+                }
+                sc.close();
+                return inputId;
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter numeric value");
+            } catch (DuplicateIdException e){
+                e.displayMessage();
+            }
+            
+        }
+        
+    }
+    
+}
+
 //This reader can be reused for Other Projects and Other Use Cases as well
 class AgeReader{
     //Handler to Read and Validate Age
-    public static int ageValidator(int upperLimit, int lowerLimit) {
+    public static int ageValidator(int lowerLimit, int upperLimit) {
         while(true){
             try {
                 System.out.println("Please Enter your age: ");
-                int ageInput = sc.nextInt();
+                int ageInput = new Scanner(System.in).nextInt();
                 if (ageInput > upperLimit || ageInput < lowerLimit) {
                     throw new InvalidAgeInputException("Please enter age between "+lowerLimit+" and "+upperLimit);
                 }
@@ -305,7 +312,7 @@ class NameReader{
         while(true){
             try {
                 // System.out.println("Please enter yor name: ");
-                String inputName = sc.nextLine();
+                String inputName = new Scanner(System.in).nextLine();
                 Matcher m1 = p1.matcher(inputName);
                 if(!m1.matches())
                     throw new InvalidNameException();
