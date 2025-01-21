@@ -1,5 +1,6 @@
 package emp.assignment;
 
+import java.security.cert.CRLException;
 //16-01-2025: Changed the code to add CEO & follow some Design Pattern
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -17,8 +18,6 @@ abstract class Employee {
     // Scanner sc = new Scanner(System.in);
 
     Employee(float salary, String designation) {
-        // All validator methods from all the READER CLASSES handle the Reading and
-        // Validation of Employee Details.
         if (designation == "CEO")
             this.id = 1;
         else
@@ -54,6 +53,10 @@ class Clerk extends Employee {
     public void raiseSalary() {
         salary += 5000;
     }
+
+    public static void addClerk(){
+        new Clerk();
+    }
 }
 
 class Programmer extends Employee {
@@ -64,6 +67,10 @@ class Programmer extends Employee {
     public void raiseSalary() {
         salary += 10000;
     }
+
+    public static void addProgrammer(){
+        new Programmer();
+    }
 }
 
 class Manager extends Employee {
@@ -73,6 +80,10 @@ class Manager extends Employee {
 
     public void raiseSalary() {
         salary += 10000;
+    }
+
+    public static void addManager(){
+        new Manager();
     }
 }
 
@@ -102,6 +113,27 @@ final class CEO extends Employee {
         return ceo;
 
     }
+}
+
+class EmployeeCreate{
+    public static Employee getEmployee(String designation){
+        // Employee employeeObject = null;
+        switch (designation) {
+            case "Clerk":
+                Clerk.addClerk();
+                break;
+            case "Programmer":
+                Programmer.addProgrammer();
+                break;
+            case "Manager":
+                Manager.addManager();
+            break;
+        }
+        return null;
+        
+
+    }
+
 }
 
 public class EmpManagementApp {
@@ -139,15 +171,21 @@ public class EmpManagementApp {
 
                         employeeType = Menu.validateChoice(4);
 
+
                         if (employeeType == 1) {
                             System.out.println("Adding Details of Clerk");
-                            new Clerk();
+                            EmployeeCreate.getEmployee("Clerk");
+                            // new Clerk();
+                            // Clerk.addClerk();
+
                         } else if (employeeType == 2) {
                             System.out.println("Adding Details of Programmer");
-                            new Programmer();
+                            EmployeeCreate.getEmployee("Programmer");
+                            // new Programmer();
                         } else if (employeeType == 3) {
                             System.out.println("Adding Details of Manager");
-                            new Manager();
+                            // new Manager();
+                            EmployeeCreate.getEmployee("Manager");
                         }
                     } while (employeeType != 4);
                     break;
