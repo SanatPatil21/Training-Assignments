@@ -440,8 +440,8 @@ class Menu {
                 }
                 if (choice < 1 || choice > maxChoice)
                     throw new InvalidChoiceException();
-                 
                 */
+                
                 //Check if there is a CEO or not
                 if(!(hashMapUpdater.empMap.containsKey(1)) && choice != 7 && choice != 6) {
                     throw new NoCEOException();
