@@ -126,13 +126,6 @@ final class CEO extends Employee {
     }
 
     public static CEO registerCEO() {
-        // if (ceo == null) {
-        // int id = 1;
-        // String name = NameReader.nameValidator();
-        // int age = AgeReader.ageValidator(21, 60);
-        // double salary = 1000000;
-        // ceo = new CEO(id, name, age, salary);
-        // }
         if (EmpManagementApp.employees.containsKey(1) == false) {
             System.out.println("Registering a new CEO");
             int id = 1;
@@ -171,7 +164,7 @@ class EmployeeCreate {
 
 }
 /*
-// Class to handle CSV STUFF
+//OLDER Classes to handle CSV STUFF
 class CSVWriter {
     public static void writeToCSV(Collection<Employee> employees) {
         System.out.println("Updating to CSV");
@@ -245,6 +238,7 @@ class CSVReader {
     }
 }
  */
+    
 class SerializationUtil {
     public static void serializeEmployees(Map<Integer, Employee> employees, String fileName) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
