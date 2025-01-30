@@ -86,8 +86,9 @@ class DatabaseOperations {
                 System.out.println("Employee Added Successfully");
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             // TODO: handle exception
+            System.out.println(e);
         }
 
     }
