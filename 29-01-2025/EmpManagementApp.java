@@ -3,16 +3,29 @@ import java.sql.*;
 import java.util.*;
 
 class DatabaseConnection {
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("org.postgresql.Driver");
-        // Storing in varibles so that can be changed later easily
-        String url = "jdbc:postgresql://localhost:5432/EmpManagementApp";
-        String uname = "postgres";
-        String pwd = "tiger";
 
-        return DriverManager.getConnection(url, uname, pwd);
-        // This shall return a Connection Object Back
+    private static final String url = "jdbc:postgresql://localhost:5432/EmpManagementApp";
+    private static final String uname = "postgres";
+    private static final String pwd = "tiger";
+    private static Connection con = null;
 
+     // Private constructor to prevent instantiation
+     private DatabaseConnection() {}
+
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+            con = DriverManager.getConnection(url, uname, pwd);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Connection getConnection() {
+        if (con == null) {
+            throw new RuntimeException("Connection is not established");
+        }
+        return con;
     }
 }
 
@@ -35,9 +48,7 @@ class DatabaseOperations {
 
         } catch (SQLException e) {
             System.out.println("Error adding employee: " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error adding employee: " + e.getMessage());
-        }
+        } 
 
     }
 
@@ -60,9 +71,7 @@ class DatabaseOperations {
 
         } catch (SQLException e) {
             System.out.println(e);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
+        } 
     }
 
     public static void appraisal(int eid, double amountToBeHiked) {
@@ -101,14 +110,12 @@ class DatabaseOperations {
                 System.out.println("----------------------------");
                 return true;
             } else {
-                // System.out.println("No employee found with ID " + eid);
                 return false;
             }
         } catch (SQLException e) {
             System.out.println(e);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
+        } 
+
         return false;
     }
 
@@ -122,9 +129,7 @@ class DatabaseOperations {
 
         } catch (SQLException e) {
             System.out.println(e);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
+        } 
         return false;
     }
 
@@ -152,9 +157,7 @@ class DatabaseOperations {
         } catch (SQLException e) {
             System.out.println(e);
 
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
+        } 
 
     }
 
@@ -182,10 +185,7 @@ class DatabaseOperations {
         } catch (SQLException e) {
             System.out.println(e);
 
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
         }
-
     }
 
     public static void searchEmployeeByDesignation(String designation) {
@@ -212,8 +212,6 @@ class DatabaseOperations {
         } catch (SQLException e) {
             System.out.println(e);
 
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
         }
 
     }
@@ -242,9 +240,7 @@ class DatabaseOperations {
         } catch (SQLException e) {
             System.out.println(e);
 
-        } catch (ClassNotFoundException e) {
-            System.out.println(e);
-        }
+        } 
 
     }
 
@@ -269,13 +265,15 @@ class EmployeeManager {
                     department = "Management";
                     break;
                 case "Others":
+                    System.out.println("Enter the Designation: ");
+                    designation = br.readLine();
                     System.out.println("Enter the Department: ");
                     department = br.readLine();
                     break;
             }
             int age = AgeReader.ageValidator(20, 60, br);
             double salary = SalaryReader.salaryValidator(10000000, br);
-            DatabaseOperations.addEmployee(name, age, salary, department, designation);
+            DatabaseOperations.addEmployee(name, age, salary, designation, department);
 
         } catch (IOException e) {
             // TODO: handle exception

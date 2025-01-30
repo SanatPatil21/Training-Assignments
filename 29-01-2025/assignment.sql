@@ -11,4 +11,9 @@ select * from employees;
 
 delete from employees;
 
-update employees set salary =  salary + 100 where eid = 7;
+update employees set department =  'Sales' where eid = 7;
+
+
+update employees set designation =  'Sales Executive' where eid = 7;
+
+
