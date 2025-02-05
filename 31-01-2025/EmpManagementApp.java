@@ -36,10 +36,10 @@ class DatabaseConnection {
     public static JdbcRowSet getRowSet(String query) {
         try {
             JdbcRowSet rowSet = RowSetProvider.newFactory().createJdbcRowSet();
-            rowSet.setUrl(url);
-            rowSet.setUsername(uname);
-            rowSet.setPassword(pwd);
-            rowSet.setCommand(query);
+                rowSet.setUrl(url);
+                rowSet.setUsername(uname);
+                rowSet.setPassword(pwd);
+                rowSet.setCommand(query);
             // rowSet.execute();
             return rowSet;
         }catch (SQLException e) {

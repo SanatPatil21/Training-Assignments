@@ -1,0 +1,79 @@
+[
+  {
+    "document_id": "EMP12345",
+    "type": "Employment Contract",
+    "parties": {
+      "employee": {
+        "name": "Sanat Patil",
+        "Aadhar": "1234-5678-9012",
+        "PAN": "ABCDE1234F"
+      },
+      "employer": {
+        "name": "Wissen Technologies Pvt. Ltd.",
+        "CIN": "123456789ABCD"
+      }
+    },
+    "terms": {
+      "designation": "Software Engineer",
+      "start_date": "2024-10-01",
+      "salary": 25000,
+      "benefits": ["Health Insurance", "Provident Fund"],
+      "notice_period": "3 months"
+    },
+    "signatures": {
+      "employee": "signed",
+      "employer": "signed",
+      "date": "2024-02-01"
+    }
+  },
+  {
+    "document_id": "CASE56789",
+    "type": "Court Case",
+    "case_details": {
+      "case_number": "WP/2024/789",
+      "court": "Supreme Court of India",
+      "judge": "Justice A.K. Mishra",
+      "filing_date": "2024-01-15"
+    },
+    "parties": {
+      "petitioner": {
+        "name": "Karan Rajput",
+        "Aadhar": "2345-6789-0123"
+      },
+      "respondent": {
+        "name": "Union of India"
+      }
+    },
+    "case_status": "Pending",
+    "next_hearing_date": "2024-03-10",
+    "verdict": null
+  },
+  {
+    "document_id": "PROP202403",
+    "type": "Property Sale Agreement",
+    "property_details": {
+      "property_id": "1234",
+      "location": "Santacruz, Mumbai, Maharashtra",
+      "area_sq_ft": 1800,
+      "market_value": 9500000
+    },
+    "buyer": {
+      "name": "Madhav Jha",
+      "Aadhar": "1234-5678-9012",
+      "PAN": "XYZPQ6789L"
+    },
+    "seller": {
+      "name": "Sharma Builders Pvt. Ltd.",
+      "CIN": "U74899DL1995PTC123456"
+    },
+    "agreement_terms": {
+      "sale_amount": 9200000,
+      "advance_paid": 2000000,
+      "balance_due": 7200000,
+      "possession_date": "2024-06-30"
+    },
+    "stamp_duty_paid": true,
+    "registered_with": "Sub-Registrar, Bandra"
+  }
+]
+
