@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
 import java.util.*;
 import java.util.stream.*;
 
@@ -113,6 +116,128 @@ class DataAdder {
     }
 }
 
+class StudentDisplayer {
+    public static void studentsInEachStandard(List<Student> universityRecords) {
+        // How many students in each standard
+        Map<Integer, Long> result1 = universityRecords.stream()
+                .collect(Collectors.groupingBy(Student::getStandard, Collectors.counting()));
+        System.out.println("Standard - Count of Students");
+        result1.forEach((standard, count) -> System.out.println(standard + " : " + count + "\t"));
+    }
+
+    public static void genderCount(List<Student> universityRecords) {
+        // How many students male & female
+        Map<String, Long> result2 = universityRecords.stream()
+                .collect(Collectors.groupingBy(Student::getGender, Collectors.counting()));
+        // System.out.println(result2);
+        System.out.println("\nGender - Count of Students");
+        result2.forEach((gender, count) -> System.out.println(gender + " : " + count + "\t"));
+    }
+
+    public static void resultsUniversityLevel(List<Student> universityRecords) {
+        // How many students have failed and pass (40%) university wise
+        Map<String, Long> result3 = universityRecords.stream()
+                .collect(Collectors.groupingBy(s -> s.getPercentage() > 40 ? "Pass" : "Fail", Collectors.counting()));
+        System.out.println("\nResult - Count of Students [University Level]");
+        result3.forEach((result, count) -> System.out.println(result + " : " + count + "\t"));
+    }
+
+    public static void resultsSchoolLevel(List<Student> universityRecords) {
+        // How many students have failed and pass (40%) school wise
+        Map<String, Map<String, Long>> result4 = universityRecords.stream()
+                .collect(Collectors.groupingBy(Student::getSchool,
+                        Collectors.groupingBy(s -> s.getPercentage() > 40 ? "Pass" : "Fail", Collectors.counting())));
+        System.out.println("\nResult - Count of Students [School Level]");
+        result4.forEach((school, result) -> result.forEach(
+                (resultBySchool, count) -> System.out.println(school + " : " + resultBySchool + " : " + count + "\t")));
+
+    }
+
+    public static void rankersUniversityLevel(List<Student> universityRecords) {
+
+        // Top 3 students (Whole university)
+        /*
+         * List<Student> result5 = universityRecords.stream()
+         * .sorted(Comparator.comparingDouble(Student::getPercentage).reversed())
+         * .limit(3)
+         * .collect(Collectors.toList());
+         * System.out.println("\nTop 3 Students");
+         * result5.forEach(s -> System.out.println("Name: " + s.getName() + "Standard: "
+         * + s.getStandard()
+         * + " Percentage: " + s.getPercentage() + " School: " + s.getName()));
+         */
+        // Instead of Using Stream we can directly apply the comparator on the List
+        // Itself
+        universityRecords.sort(Comparator.comparingDouble(Student::getPercentage).reversed());
+        System.out.println("\nTop 3 Students University Wise");
+        universityRecords.subList(0, 3).forEach(System.out::println);
+
+    }
+
+    public static void rankersBySchoolLevel(List<Student> universityRecords) {
+        // Top scorer school wise
+        // NOTE:- maxBy returns Optional so ifPresent is used
+        Map<String, Optional<Student>> result6 = universityRecords.stream()
+                .collect(Collectors.groupingBy(Student::getSchool,
+                        Collectors.maxBy(Comparator.comparingDouble(Student::getPercentage))));
+
+        System.out.println("\nTop Scorer School Wise");
+        result6.forEach((school, studentOpt) -> {
+            studentOpt.ifPresent(student -> {
+                System.out.println("School: " + school + ", Name: " + student.getName() + ", Percentage: "
+                        + student.getPercentage());
+            });
+        });
+
+    }
+
+    public static void avgAgeByGender(List<Student> universityRecords) {
+        // Average age of male & female students
+        Map<String, Double> result7 = universityRecords.stream()
+                .collect(Collectors.groupingBy(Student::getGender, Collectors.averagingInt(Student::getAge)));
+        System.out.println("\n Average age of male & female students");
+        result7.forEach((gender, avgAge) -> {
+            System.out.println("Gender: " + gender + ", Average Age: " + avgAge);
+        });
+
+    }
+
+    public static void totalFeesSchoolWise(List<Student> universityRecords) {
+
+        // Total fees collected school wise
+        Map<String, Double> result8 = universityRecords.stream()
+                .collect(Collectors.groupingBy(Student::getSchool,
+                        Collectors.summingDouble(student -> student.getFees())));
+
+        System.out.println("\nTotal Fees Collected School Wise");
+        result8.forEach((school, totalFees) -> {
+            System.out.println("School: " + school + ", Total Fees Collected: " + totalFees);
+        });
+
+    }
+
+    public static void totalFeesPendingSchoolWise(List<Student> universityRecords) {
+        // Total fees pending school wise
+        Map<String, Double> result9 = universityRecords.stream()
+                .collect(Collectors.groupingBy(Student::getSchool,
+                        Collectors.summingDouble(student -> student.getPendingFees())));
+
+        System.out.println("\nTotal Fees Pending School Wise");
+        result9.forEach((school, totalFees) -> {
+            System.out.println("School: " + school + ", Total Fees Pendings: " + totalFees);
+        });
+
+    }
+
+    public static void totalStudents(List<Student> universityRecords) {
+
+        // Total number of students (University)
+        long result10 = universityRecords.size();
+        System.out.println("\nTotal Number of Students: " + result10);
+
+    }
+}
+
 public class StudentManagementApp {
     public static void main(String[] args) {
         List<Student> universityRecords = new ArrayList<Student>();
@@ -136,95 +261,64 @@ public class StudentManagementApp {
          *
          */
 
-        // How many students in each standard
-        Map<Integer, Long> result1 = universityRecords.stream()
-                .collect(Collectors.groupingBy(Student::getStandard, Collectors.counting()));
-        System.out.println("Standard - Count of Students");
-        result1.forEach((standard, count) -> System.out.println(standard + " : " + count + "\t"));
+        while (true) {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Available Operations");
+            System.out.println("1. Exit");
+            System.out.println("2. How many students in each standard");
+            System.out.println("3. How many students male & female");
+            System.out.println("4. How many students have failed and pass (40%) - University Wise");
+            System.out.println("5. How many students have failed and pass (40%) - School Wise");
+            System.out.println("6. Top 3 students (Whole university)");
+            System.out.println("7. Top scorer school wise");
+            System.out.println("8. Average age of male & female students");
+            System.out.println("9. Total fees collected school wise");
+            System.out.println("10. Total fees pending school wise");
+            System.out.println("11. Total number of students (University)");
 
-        // How many students male & female
-        Map<String, Long> result2 = universityRecords.stream()
-                .collect(Collectors.groupingBy(Student::getGender, Collectors.counting()));
-        // System.out.println(result2);
-        System.out.println("\nGender - Count of Students");
-        result2.forEach((gender, count) -> System.out.println(gender + " : " + count + "\t"));
+            System.out.println("Enter the Choice");
+            int choice = Integer.parseInt(br.readLine());
 
-        // How many students have failed and pass (40%) university wise
-        Map<String, Long> result3 = universityRecords.stream()
-                .collect(Collectors.groupingBy(s -> s.getPercentage() > 40 ? "Pass" : "Fail", Collectors.counting()));
-        System.out.println("\nResult - Count of Students [University Level]");
-        result3.forEach((result, count) -> System.out.println(result + " : " + count + "\t"));
-
-        // How many students have failed and pass (40%) school wise
-        Map<String, Map<String, Long>> result4 = universityRecords.stream()
-                .collect(Collectors.groupingBy(Student::getSchool,
-                        Collectors.groupingBy(s -> s.getPercentage() > 40 ? "Pass" : "Fail", Collectors.counting())));
-        System.out.println("\nResult - Count of Students [School Level]");
-        result4.forEach((school, result) -> result.forEach(
-                (resultBySchool, count) -> System.out.println(school + " : " + resultBySchool + " : " + count + "\t")));
-        // System.out.println(result4);
-
-        // Top 3 students (Whole university)
-        /*
-         * List<Student> result5 = universityRecords.stream()
-         * .sorted(Comparator.comparingDouble(Student::getPercentage).reversed())
-         * .limit(3)
-         * .collect(Collectors.toList());
-         * System.out.println("\nTop 3 Students");
-         * result5.forEach(s -> System.out.println("Name: " + s.getName() + "Standard: "
-         * + s.getStandard()
-         * + " Percentage: " + s.getPercentage() + " School: " + s.getName()));
-         */
-        //Instead of Using Stream we can directly apply the comparator on the List Itself
-        universityRecords.sort(Comparator.comparingDouble(Student::getPercentage).reversed());
-        System.out.println("\nTop 3 Students University Wise");
-        universityRecords.subList(0, 3).forEach(System.out::println);
-
-        // Top scorer school wise
-        // NOTE:- maxBy returns Optional so ifPresent is used
-        Map<String, Optional<Student>> result6 = universityRecords.stream()
-                .collect(Collectors.groupingBy(Student::getSchool,
-                        Collectors.maxBy(Comparator.comparingDouble(Student::getPercentage))));
-
-        System.out.println("\nTop Scorer School Wise");
-        result6.forEach((school, studentOpt) -> {
-            studentOpt.ifPresent(student -> {
-                System.out.println("School: " + school + ", Name: " + student.getName() + ", Percentage: "
-                        + student.getPercentage());
-            });
-        });
-
-        // Average age of male & female students
-        Map<String, Double> result7 = universityRecords.stream()
-                .collect(Collectors.groupingBy(Student::getGender, Collectors.averagingInt(Student::getAge)));
-        System.out.println("\n Average age of male & female students");
-        result7.forEach((gender, avgAge) -> {
-            System.out.println("Gender: " + gender + ", Average Age: " + avgAge);
-        });
-
-        // Total fees collected school wise
-        Map<String, Double> result8 = universityRecords.stream()
-                .collect(Collectors.groupingBy(Student::getSchool,
-                        Collectors.summingDouble(student -> student.getFees())));
-
-        System.out.println("\nTotal Fees Collected School Wise");
-        result8.forEach((school, totalFees) -> {
-            System.out.println("School: " + school + ", Total Fees Collected: " + totalFees);
-        });
-
-        // Total fees pending school wise
-        Map<String, Double> result9 = universityRecords.stream()
-                .collect(Collectors.groupingBy(Student::getSchool,
-                        Collectors.summingDouble(student -> student.getPendingFees())));
-
-        System.out.println("\nTotal Fees Pending School Wise");
-        result9.forEach((school, totalFees) -> {
-            System.out.println("School: " + school + ", Total Fees Pendings: " + totalFees);
-        });
-
-        // Total number of students (University)
-        long result10 = universityRecords.size();
-        System.out.println("\nTotal Number of Students: " + result10);
+            switch (choice) {
+                case 1:
+                    System.out.println("Exiting program...");
+                    System.exit(0);
+                    break;
+                case 2:
+                    StudentDisplayer.studentsInEachStandard(universityRecords);
+                    break;
+                case 3:
+                    StudentDisplayer.genderCount(universityRecords);
+                    break;
+                case 4:
+                    StudentDisplayer.resultsUniversityLevel(universityRecords);
+                    break;
+                case 5:
+                    StudentDisplayer.resultsSchoolLevel(universityRecords);
+                    break;
+                case 6:
+                    StudentDisplayer.rankersUniversityLevel(universityRecords);
+                    break;
+                case 7:
+                    StudentDisplayer.rankersBySchoolLevel(universityRecords);
+                    break;
+                case 8:
+                    StudentDisplayer.avgAgeByGender(universityRecords);
+                    break;
+                case 9:
+                    StudentDisplayer.totalFeesSchoolWise(universityRecords);
+                    break;
+                case 10:
+                    StudentDisplayer.totalFeesPendingSchoolWise(universityRecords);
+                    break;
+                case 11:
+                    StudentDisplayer.totalStudents(universityRecords);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 11.");
+                    break;
+            }
+        }
 
     }
 }
