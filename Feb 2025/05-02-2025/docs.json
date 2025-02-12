@@ -27,6 +27,33 @@
     }
   },
   {
+    "document_id": "EMP12346",
+    "type": "Employment Contract",
+    "parties": {
+      "employee": {
+        "name": "Madhav Jha",
+        "Aadhar": "1234-5678-9012",
+        "PAN": "ABCDE5678F"
+      },
+      "employer": {
+        "name": "Wissen Technologies Pvt. Ltd.",
+        "CIN": "123456789ABCD"
+      }
+    },
+    "terms": {
+      "designation": "Software Engineer",
+      "start_date": "2025-01-08",
+      "salary": 25000,
+      "benefits": [],
+      "notice_period": "3 months"
+    },
+    "signatures": {
+      "employee": "signed",
+      "employer": "signed",
+      "date": "2024-02-01"
+    }
+  },
+  {
     "document_id": "CASE56789",
     "type": "Court Case",
     "case_details": {
@@ -48,6 +75,28 @@
     "next_hearing_date": "2024-03-10",
     "verdict": null
   },
+
+    {
+      "document_id": "CASE56779",
+      "type": "Court Case",
+      "case_details": {
+        "case_number": "WP/2024/789",
+        "court": "Supreme Court of India",
+        "judge": "Justice A.K. Mishra",
+        "filing_date": "2024-01-15"
+      },
+      "parties": {
+        "petitioner": {
+          "name": "Karan Rajput",
+          "Aadhar": "2345-6789-0123"
+        },
+        "respondent": {}
+      },
+      "case_status": "Pending",
+      "next_hearing_date": "2024-03-10",
+      "verdict": null
+    },
+  
   {
     "document_id": "PROP202403",
     "type": "Property Sale Agreement",

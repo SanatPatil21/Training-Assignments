@@ -1,0 +1,12 @@
+Feb 12 2024 Assignment
+
+* How to test a method which has return type void
+* How to test an interface without having an access to its implementation
+* How to test for the method been called exactly for 3 times
+
+
+
+interface A{
+	public void xyz();
+
+}
