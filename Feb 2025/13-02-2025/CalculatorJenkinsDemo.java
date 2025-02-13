@@ -7,9 +7,10 @@ class Calculator
 	public void sub(int a, int b)
 	{
 		System.out.println("Subtract : "+(a-b));
+		System.out.println("Test");
 	}
 }
-public class CalculatorMain
+public class CalculatorJenkinsDemo
 {
 	public static void main(String args[])
 	{
