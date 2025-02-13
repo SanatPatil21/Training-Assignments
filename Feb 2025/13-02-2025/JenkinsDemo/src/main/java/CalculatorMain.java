@@ -30,7 +30,7 @@ public class CalculatorMain
 		c1.add(10, 20);
 		c1.sub(10, 20);
 		c1.mul(10, 20);
-		c1.div(20, 10);
+//		c1.div(20, 10);
 		
 	}
 }
