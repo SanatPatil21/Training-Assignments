@@ -13,10 +13,12 @@ class Calculator
 		System.out.println("Multiply : "+(a * b));
 	}
 	//Some Changes
+	/*
 	public void div(int a,int b)
 	{
 		System.out.println("Divide : "+(a/b));
 	}
+	*/
 }
 public class CalculatorMain
 {
