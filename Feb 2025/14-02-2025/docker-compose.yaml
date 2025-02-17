@@ -1,0 +1,36 @@
+
+services:
+  db:
+    image: postgres:15
+    container_name: empdb
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: employees
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  
+
+
+  app:
+    build: .
+    container_name: empcode
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/employees
+      DB_USER: admin
+      DB_PASSWORD: admin
+    stdin_open: true  # Enable interactive input
+    tty: true
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
