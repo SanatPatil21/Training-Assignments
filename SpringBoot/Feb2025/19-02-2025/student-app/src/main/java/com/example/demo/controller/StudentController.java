@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,21 +20,26 @@ public class StudentController {
 	
 	@Autowired
     private StudentService studentService;
-
 	
 	@GetMapping(path="/")
 	public String getBasePath() {
 		return "App is Ready";
 	}
 	
+	//New REST Endpoints after updating Service
+	@PostMapping("/add")
+	public String addStudent(@RequestBody Student s) {
+		return studentService.addStudent(s);
+	}
+
+	
 	@GetMapping("/students")
 	public List<Student> getAllStudents(){
 		return studentService.getStudentList();
 	}
-	
 	@GetMapping("/students/{rollNo}")
-	public List<Student> getStudentsByRollNo(@PathVariable int rollNo){
-		return studentService.getStudentList().stream().filter(student -> student.getRollNo()==rollNo).collect(Collectors.toList());
+	public Student getStudentByRollNo(@PathVariable int rollNo){
+		return studentService.getStudentByRollNo(rollNo);
 	}
 	
 	@GetMapping("/students/school")
@@ -44,61 +51,61 @@ public class StudentController {
 		
 	}
 	
+	
 	@GetMapping("/students/result")
 	public List<Student> getResults(@RequestParam("pass")String pass){
-		if(pass.equalsIgnoreCase("true")) {
-			return studentService.getStudentList()
-					.stream()
-					.filter(student -> student.getPercentage()>40)
-					.collect(Collectors.toList());
-			
-		}else {
-			return studentService.getStudentList()
-					.stream()
-					.filter(student -> student.getPercentage()<40)
-					.collect(Collectors.toList());
-			
-		}
+		
+		return studentService.getResults(pass);
+		
 		
 	}
 	
 	@GetMapping("/students/{standard}/count")
 	public long getCountOfStudents(@PathVariable int standard) {
-		return studentService.getStudentList()
-				.stream()
-				.filter(student -> student.getStandard()==standard)
-				.count();
+		return studentService.getCountOfStudents(standard);
 		
 	}
 	
 	@GetMapping("/students/strength")
 	public long getStrengthOfSchool(@RequestParam("school")String school) {
-		return studentService.getStudentList()
-				.stream()
-				.filter(student -> student.getSchool().equalsIgnoreCase(school))
-				.count();
+		return studentService.getStrengthOfSchool(school);
 		
 	}
 	
+	
 	@GetMapping("/students/toppers")
 	public List<Student> getToppers(){
-		return studentService.getStudentList()
-				.stream()
-				.sorted(Comparator.comparingInt(Student::getPercentage).reversed())
-				.limit(5)
-				.collect(Collectors.toList());
+		return studentService.getToppers();
 	}
 	
-	
-	//
+
 	@GetMapping("/students/toppers/{standard}")
 	public List<Student> getToppersByStandard(@PathVariable int standard){
-		return studentService.getStudentList()
-				.stream()
-				.filter(student->student.getStandard()==standard)
-				.sorted(Comparator.comparingInt(Student::getPercentage).reversed())
-				.collect(Collectors.toList());
+		return studentService.getToppersByStandard(standard);
 	}
+	
+	@GetMapping("/add/dummy")
+	public void addData() {
+		studentService.addDummyRecords();
+	}
+	
+	/*
+	@GetMapping("/students/class_teacher")
+	public void getClassTeacher(@RequestParam("regno")int regno) {
+		studentService.getTeacher(regno);
+	}
+	
+	*/
+	
+	
+	
+	
+	
+
+	
+
+	
+	
 	
 	
 	

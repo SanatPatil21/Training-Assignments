@@ -1,25 +1,64 @@
 package com.example.demo.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="students")
 public class Student {
+	@Id
+	@Column(unique = true,nullable =false)
+	private int regNo;
 	private int rollNo;
 	private String name;
 	private int standard;
 	private String school;
 	private int percentage;
 	
+	@ManyToOne
+    @JoinColumn(name = "standard", referencedColumnName = "standard", insertable = false, updatable = false)
+    private Teacher classTeacher;
+
 	
+	
+	public int getRegNo() {
+		return regNo;
+	}
+
+
+
+	public void setRegNo(int regNo) {
+		this.regNo = regNo;
+	}
+
+
+
+	public Teacher getClassTeacher() {
+		return classTeacher;
+	}
+
+
+
+	public void setClassTeacher(Teacher classTeacher) {
+		this.classTeacher = classTeacher;
+	}
+
+
+
 	public Student() {}
 	
 	
-	public Student(int rollNo, String name, int standard, String school, int percentage) {
+
+	public Student(int regNo,int rollNo, String name, int standard, String school, int percentage) {
+        this.regNo=regNo;
 		this.rollNo = rollNo;
-		this.name = name;
-		this.standard = standard;
-		this.school = school;
-		this.percentage = percentage;
-	}
-	
-	
+        this.name = name;
+        this.standard = standard;
+        this.school = school;
+        this.percentage = percentage;
+    }
+
+
+
 	public int getRollNo() {
 		return rollNo;
 	}

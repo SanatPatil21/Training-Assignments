@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "spring.datasource.postgresql.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.postgresql.url'"
+  },
+  {
+    "name": "spring.datasource.h2.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.h2.url'"
+  },
+  {
+    "name": "spring.datasource.h2.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.h2.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource.h2.hikari.maximum-pool-size",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.h2.hikari.maximum-pool-size'"
+  },
+  {
+    "name": "spring.datasource.h2.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.h2.password'"
+  },
+  {
+    "name": "spring.datasource.h2.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.h2.username'"
+  }
+]}
