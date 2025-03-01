@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Our Bank - Services</title>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>OUR BANK</h1>
+        <h2>Secure & Convenient Banking</h2>
+    </div>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li class="current-page-marker"><a href="services.html">Services</a></li>
+                <li><a href="login.html">Netbanking</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2>Our Tools</h2>
+            <div class="tools-selector-container">
+                <div class="tools-selector" id="loan-calculator-selector" onclick="showTool('loan-calculator')">
+                    Loan Calculator
+                </div>
+                <div class="tools-selector" id="deposit-calculator-selector" onclick="showTool('deposit-calculator')">
+                    Deposit Calculator
+                </div>
+            </div>
+
+            <!-- Loan Calculator Component -->
+            <div id="loan-calculator" class="tool-content">
+                <h3>Loan Calculator</h3>
+                <p>Enter loan details to calculate EMI.</p>
+                <form onsubmit="calculateEMI(); return false">
+                    <input type="text" placeholder="Applicant's Name" required>
+                    <select name="loan-types" id="loan-types" onchange="updateInterestRate()" required>
+                        <option value="" disabled selected>Choose Loan Type</option>
+                        <option value="home">Home Loan</option>
+                        <option value="car">Car Loan</option>
+                        <option value="personal">Personal Loan</option>
+                    </select>
+                    <input type="number" id="interest-rate" placeholder="Interest Rate (AutoCalculated)" readonly
+                        required>
+
+                    <input type="number" id="tenure" placeholder="Tenure (In years)" onchange="checkTenure()" required>
+
+                    <input type="number" id="loan-amount" placeholder="Loan Amount " onchange="checkAmount()" required>
+                    <button type="submit">Calculate EMI</button>
+
+                </form>
+                <div id="emi-result" class="emi-box"></div>
+
+
+
+            </div>
+
+            <!-- Deposit Calculator Component -->
+            <div id="deposit-calculator" class="tool-content">
+                <h3>Deposit Calculator</h3>
+                <p>Enter deposit details to calculate interest.</p>
+
+                <form onsubmit="calculateMaturity(); return false">
+                    <input type="number" placeholder="Deposit Amount" id="deposit-amount" required>
+
+                    <input type="number" id="deposit-tenure" placeholder="Tenure (In years)" onchange="checkDepositTenure()" required>
+
+                    <div class="fixed-rate">Interest Rate: <span>7%</span></div>
+
+                    <button type="submit">Calculate Interest</button>
+                </form>
+
+                <div id="maturity-result" class="maturity-box"></div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Our Bank. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+    </div>
+</body>
+
+</html>
