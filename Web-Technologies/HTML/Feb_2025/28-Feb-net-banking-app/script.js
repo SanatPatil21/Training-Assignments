@@ -52,6 +52,8 @@ function checkTenure(){
     if(tenure > maxTenure[loanType]){
         alert(`Tenure should be less than ${maxTenure[loanType]} years for ${loanType} loan.`);
         tenureField.value = 0;
+        document.getElementById("emi-result").innerHTML = "Please enter valid values.";
+        return;
     }
 }
 
@@ -61,6 +63,7 @@ function checkAmount(){
     const amountField = document.getElementById("loan-amount");
     const loanType = document.getElementById("loan-types").value;
     const amount = parseInt(amountField.value);
+    const result = document.getElementById('emi-result');
 
     const maxAmount = {
         home: 10000000,
@@ -74,12 +77,19 @@ function checkAmount(){
     };
 
     if(amount > maxAmount[loanType]){
-        alert(`Loan amount should be less than Rs. ${maxAmount[loanType]} for ${loanType} loan.`);
-        amountField.value = 0;
+        // alert(`Loan amount should be less than Rs. ${maxAmount[loanType]} for ${loanType} loan.`);
+        amountField.value = "";
+        result.value=0;
+        result.innerHTML = "Please enter valid values.";    
+        return;
+
     }
     else if(amount < minAmount[loanType]){
-        alert(`Loan amount should be greater than Rs. ${minAmount[loanType]} for ${loanType} loan.`);
-        amountField.value = 0;
+        // alert(`Loan amount should be greater than Rs. ${minAmount[loanType]} for ${loanType} loan.`);
+        amountField.value = "";
+        result.value=0;
+        result.innerHTML = "Please enter valid values.";
+        return;
     }
 
 }
@@ -116,6 +126,10 @@ function checkDepositTenure(){
     const tenureField = document.getElementById("deposit-tenure");
     const tenure = parseInt(tenureField.value);
     const maxTenure = 10;
+    if(tenure<0){
+        alert(`Tenure should be greater than 0 years for Deposit.`);
+        tenureField.value = 0;
+    }
     if(tenure > maxTenure){
         alert(`Tenure should be less than ${maxTenure} years for Deposit.`);
         tenureField.value = 0;
@@ -125,6 +139,7 @@ function checkDepositTenure(){
 function calculateMaturity(){
     const depositAmount = parseFloat(document.getElementById("deposit-amount").value);
     const tenure = parseFloat(document.getElementById("deposit-tenure").value);
+    //Fixing Value here
     const interestRate = 7;
 
     
