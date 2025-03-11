@@ -1,0 +1,13 @@
+
+<div class="circle-input">
+    <label for="radius">Enter Radius:</label>
+    <input type="number" id="radius" [(ngModel)]="radius">
+    <button (click)="calculate()">Show Results</button>
+  </div>
+  <div *ngIf="showResults">
+    <app-circle-result 
+      [diameter]="getDiameter()" 
+      [perimeter]="getPerimeter()" 
+      [area]="getArea()">
+    </app-circle-result>
+  </div>

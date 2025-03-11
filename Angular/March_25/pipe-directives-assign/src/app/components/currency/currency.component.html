@@ -1,0 +1,13 @@
+<div class="currency-card">
+    <label for="amount">Enter Amount (in INR):</label>
+    <input type="number" id="amount" [(ngModel)]="amount">
+  </div>
+  
+  <div class="currency-values">
+    <p>Amount in United States Dollar (USD): <strong>{{ amount | money:'USD' | currency:'USD' }}</strong></p>
+    <p>Amount in Euros (EUR): <strong>{{ amount | money:'EUR' | currency:'EUR' }}</strong></p>
+    <p>Amount in Japanese Yen (JPY): <strong>{{ amount | money:'JPY' | currency:'JPY' }}</strong></p>
+    <p>Amount in Saudi Arabia Riyal (SAR): <strong>{{ amount | money:'SAR' | currency:'SAR' }}</strong></p>
+    <p>Amount in Australian Dollar (AUD): <strong>{{ amount | money:'AUD' | currency:'AUD' }}</strong></p>
+  </div>
+  

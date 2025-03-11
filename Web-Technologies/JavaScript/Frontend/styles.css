@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px 0;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+    font-weight: 600;
+    font-size: 28px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 500;
+    font-size: 20px;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="email"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #f9f9f9;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus {
+    outline: none;
+    border-color: #4dabf7;
+    box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.1);
+    background-color: #fff;
+  }
+  
+  .form-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+  }
+  
+  button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  
+  #submitBtn {
+    background-color: #4dabf7;
+    color: white;
+  }
+  
+  #submitBtn:hover {
+    background-color: #339af0;
+    transform: translateY(-1px);
+  }
+  
+  #cancelBtn {
+    background-color: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+  }
+  
+  #cancelBtn:hover {
+    background-color: #e9ecef;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .search-container {
+    margin-bottom: 25px;
+  }
+  
+  #searchInput {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s;
+    background-color: white;
+  }
+  
+  #searchInput:focus {
+    outline: none;
+    border-color: #4dabf7;
+    box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.1);
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  th,
+  td {
+    padding: 16px 20px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f8f9fa;
+    font-weight: 500;
+    color: #495057;
+    font-size: 14px;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  th:first-child {
+    border-top-left-radius: 12px;
+  }
+  
+  th:last-child {
+    border-top-right-radius: 12px;
+  }
+  
+  td {
+    border-bottom: 1px solid #f1f3f5;
+    font-size: 15px;
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
+  tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .action-btn {
+    padding: 8px 12px;
+    margin-right: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  
+  .edit-btn {
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  
+  .edit-btn:hover {
+    background-color: #dee2e6;
+  }
+  
+  .delete-btn {
+    background-color: #ffe3e3;
+    color: #e03131;
+  }
+  
+  .delete-btn:hover {
+    background-color: #ffc9c9;
+  }
+  
+  @media (max-width: 768px) {
+    .form-buttons {
+      flex-direction: column;
+    }
+  
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .table-container {
+      border-radius: 8px;
+    }
+  
+    th,
+    td {
+      padding: 12px 15px;
+    }
+  
+    h1 {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+  
+    .form-container,
+    .table-container {
+      padding: 20px;
+      border-radius: 8px;
+    }
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    display: none; /* Initially hidden */
+}

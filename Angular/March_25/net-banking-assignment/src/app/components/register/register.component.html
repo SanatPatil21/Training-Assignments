@@ -1,0 +1,47 @@
+<h3>
+    User Login
+</h3>
+<form [formGroup]="userForm" (ngSubmit)="submitForm(userForm.value)">
+    <h4>
+      <!-- Customer ID -->
+      Enter Customer ID: <input type="number" name="cid" formControlName="cid"><br>
+      <div *ngIf="userForm.get('cid')?.invalid && userForm.get('cid')?.touched">
+        <span *ngIf="userForm.get('cid')?.errors?.['required']">Customer ID is required.</span>
+        <span *ngIf="userForm.get('cid')?.errors?.['pattern']">Must be exactly 7 digits.</span>
+      </div>
+  
+      <!-- Username -->
+      Enter Username: <input type="text" name="uname" formControlName="uname"><br>
+      <div *ngIf="userForm.get('uname')?.invalid && userForm.get('uname')?.touched">
+        <span *ngIf="userForm.get('uname')?.errors?.['required']">Username is required.</span>
+        <span *ngIf="userForm.get('uname')?.errors?.['minlength']">Minimum 5 characters required.</span>
+        <span *ngIf="userForm.get('uname')?.errors?.['pattern']">Only alphabets allowed (No digits).</span>
+      </div>
+  
+      <!-- Password -->
+      Enter Password: <input type="password" name="password" formControlName="password"><br>
+      <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+        <span *ngIf="userForm.get('password')?.errors?.['required']">Password is required.</span>
+        <span *ngIf="userForm.get('password')?.errors?.['minlength']">At least 8 characters required.</span>
+        <span *ngIf="userForm.get('password')?.errors?.['pattern']">Must contain 1 uppercase, 1 lowercase, and 1 special character.</span>
+      </div>
+  
+      <!-- Confirm Password -->
+      Confirm Password: <input type="password" name="confirmPassword" formControlName="confirmPassword"><br>
+      <div *ngIf="userForm.hasError('passwordMismatch') && userForm.get('confirmPassword')?.touched">
+        <span>Passwords do not match.</span>
+      </div>
+  
+      <!-- Account Number -->
+      Enter Account Number: <input type="number" name="accountNumber" formControlName="accountNumber"><br>
+      <div *ngIf="userForm.get('accountNumber')?.invalid && userForm.get('accountNumber')?.touched">
+        <span *ngIf="userForm.get('accountNumber')?.errors?.['required']">Account Number is required.</span>
+        <span *ngIf="userForm.get('accountNumber')?.errors?.['pattern']">Must be at least 6 digits.</span>
+      </div>
+  
+      <input type="submit" value="SUBMIT" [disabled]="userForm.invalid">
+      <input type="reset" value="RESET">
+    </h4>
+  </form>
+  
+  

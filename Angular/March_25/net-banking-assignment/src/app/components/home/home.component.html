@@ -1,0 +1,56 @@
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <i class="fa-solid fa-landmark"></i>
+            <span>Kalupur Bank</span>
+        </div>
+        <nav>
+            <ul>
+                <li (click)="loadHome()" class="active">
+                    <a ><i class="fa-solid fa-house"></i> Home</a>
+                </li>
+                <li (click)="loadRegister()">
+                    <a ><i class="fa-solid fa-user-plus"></i> Register</a>
+                </li>
+                <li (click)="loadLogin()">
+                    <a ><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header>
+            <div class="header-left">
+                <button class="toggle-sidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1>Kalupur Bank</h1>
+            </div>
+            <div class="header-right">
+                <button class="btn">Contact Us</button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="content">
+
+            <div class="welcome-card" *ngIf="homeVisible">
+                <h2>Welcome to Kalupur Bank Net Banking</h2>
+                <p>Banking made simple, secure, and convenient.</p>
+                <button class="btn primary-btn">Get Started</button>
+            </div>
+
+            <app-login (loginSuccess)="loadHome()" *ngIf="loginVisible"></app-login>
+
+            <app-register *ngIf="registerVisible"></app-register>
+
+            <app-dashboard *ngIf="loggedIn"></app-dashboard>
+
+
+        </div>
+    </div>
+</div>

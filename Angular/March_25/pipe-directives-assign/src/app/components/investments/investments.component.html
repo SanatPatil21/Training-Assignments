@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Investment Options</h2>
+  
+    <div class="radio-group">
+      <label *ngFor="let option of investmentOptions">
+        <input
+          type="radio"
+          name="investmentType"
+          [value]="option"
+          [(ngModel)]="selectedInvestment"
+        />
+        {{ option }}
+      </label>
+    </div>
+  
+    <ng-container [ngSwitch]="selectedInvestment">
+      <app-loan *ngSwitchCase="'LOAN'"></app-loan>
+      <app-deposit *ngSwitchCase="'DEPOSIT'"></app-deposit>
+      <app-mutual-fund *ngSwitchCase="'MUTUAL FUND'"></app-mutual-fund>
+      <p *ngSwitchDefault>Please select an investment type.</p>
+    </ng-container>
+  </div>
+  

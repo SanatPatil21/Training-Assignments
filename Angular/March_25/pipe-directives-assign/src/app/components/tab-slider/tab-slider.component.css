@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.tab-bar {
+  display: flex;
+  position: relative;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.slider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 33.33%;
+  height: 100%;
+  background: #007bff;
+  border-radius: 25px;
+  transition: left 0.3s ease-in-out;
+}
+
+button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s;
+}
+
+button.active {
+  color: white;
+}
+
+.content {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}

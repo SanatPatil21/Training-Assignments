@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="tab-bar">
+      <div class="slider" [ngStyle]="{'left': selectedTab * 33.33 + '%'}"></div>
+      <button *ngFor="let tab of ['Tab 1', 'Tab 2', 'Tab 3']; let i = index" 
+              [class.active]="selectedTab === i"
+              (click)="selectTab(i)">
+        {{ tab }}
+      </button>
+    </div>
+    <div class="content" [ngSwitch]="selectedTab">
+        <app-circle *ngSwitchCase="0"></app-circle>
+        <app-currency *ngSwitchCase="1"></app-currency>
+        <app-investments *ngSwitchCase="2"></app-investments>
+      </div>
+      
+  </div>
+  
